@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAJESH | Web Designer Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --accent: #E74C3C;
+            --bg-color: #ECF0F1;
+            --text-color: #2C3E50;
+            --card-bg: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary: #34495E;
+            --accent: #E74C3C;
+            --bg-color: #1A1A1A;
+            --text-color: #ECF0F1;
+            --card-bg: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            background: rgba(236, 240, 241, 0.8);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(44, 62, 80, 0.6), rgba(44, 62, 80, 0.6)), 
+                        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto 0;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-container {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 10px solid var(--card-bg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .lang-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="logo">RAJESH.</div>
+        <div class="nav-right">
+            <ul style="display: flex; gap: 1.5rem;" class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-btn">
+                <i data-lucide="sun" id="theme-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="reveal">Colors Logic,<br>Designs Magic.</h1>
+            <p class="reveal">JLPT N1の日本語能力と確かなIT技術で、企業の思いを「伝わる」形に。<br>CVR向上に貢献するWEBデザインを提供します。</p>
+            <div class="cta-group reveal">
+                <a href="#works" class="btn btn-primary">実績を見る</a>
+                <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title reveal">Who I am</h2>
+        <div class="about-grid">
+            <div class="profile-container reveal">
+                <!-- プロフィール画像のプレースホルダー -->
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh&eyebrows=default&mouth=smile&top=shortHair" alt="RAJESH" class="profile-img">
+            </div>
+            <div class="about-text reveal">
+                <h3>はじめまして、<br>WEBデザイナーのRAJESHです。</h3>
+                <p>栃木県のTBC学院で2年間、WEBデザインを勉強してきました。現在はフリーランスとして東京を拠点に活動しています。ユーザー体験を重視した、論理的かつ美しいデザインを得意としています。</p>
+                
+                <div style="margin-top: 25px;">
+                    <strong>強み: 多言語対応 & グローバルデザイン</strong>
+                    <p>日本語(JLPT N1)をはじめ、多様な言語でのコンテンツ制作・インターナショナルなWEBページ作成が可能です。</p>
+                    <div class="lang-tags">
+                        <span class="tag">日本語 (JLPT N1)</span>
+                        <span class="tag">English</span>
+                        <span class="tag">Spanish</span>
+                        <span class="tag">Hindi</span>
+                        <span class="tag">Nepali</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Get in Touch</h2>
+            <div class="contact-content reveal">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <p>制作のご依頼、お見積り、その他のご相談はお気軽にどうぞ。2営業日以内に返信いたします。</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                            <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                        </div>
+                    </div>
+                    <form onsubmit="event.preventDefault(); alert('メッセージが送信されました（デモ）');">
+                        <div class="form-group">
+                            <label>お名前</label>
+                            <input type="text" placeholder="山田 太郎" required>
+                        </div>
+                        <div class="form-group">
+                            <label>メールアドレス</label>
+                            <input type="email" placeholder="example@mail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>お問い合わせ内容</label>
+                            <textarea rows="5" placeholder="ご相談内容をご記入ください"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">送信する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 RAJESH Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        themeBtn.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.setAttribute('data-lucide', 'sun');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons();
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Initial check
+        window.onload = reveal;
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                nav.style.height = '70px';
+            } else {
+                nav.style.boxShadow = 'none';
+                nav.style.height = '80px';
+            }
+        });
+    </script>
+</body>
+</html>
